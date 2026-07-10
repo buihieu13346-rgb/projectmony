@@ -59,16 +59,12 @@ u=>u.username==username
 
 // tạo tài khoản mới
 
-if(!user){
-
-
-users.push({
-
-username,
-password,
-device
-
-});
+if (!user) {
+    return res.json({
+        ok: false,
+        msg: "Tài khoản không tồn tại"
+    });
+}
 
 
 saveUsers(users);
