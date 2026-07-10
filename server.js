@@ -37,6 +37,30 @@ app.post("/login", (req, res) => {
     const user = users.find(
         u => u.username === username
     );
+    // Đăng xuất
+app.post("/logout", (req, res) => {
+
+    const { username } = req.body;
+
+    const users = readUsers();
+
+    const user = users.find(
+        u => u.username === username
+    );
+
+    if (user) {
+
+        user.device = "";
+
+        saveUsers(users);
+
+    }
+
+    res.json({
+        ok: true
+    });
+
+});
 
     // Không tồn tại tài khoản
     if (!user) {
