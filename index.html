@@ -202,16 +202,15 @@ await res.json();
 
 if(data.ok){
 
+localStorage.user=user.value;
 
 document
 .getElementById("login")
 .style.display="none";
 
-
 document
 .getElementById("quiz")
 .style.display="block";
-
 
 }
 
@@ -253,6 +252,27 @@ a && a.value=="true"
 
 "Sai";
 
+
+}
+  async function logout(){
+
+await fetch("/logout",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+username:localStorage.user
+
+})
+
+});
+
+location.reload();
 
 }
 
