@@ -70,47 +70,41 @@ if (!user) {
 saveUsers(users);
 
 
-return res.json({
+// Không tồn tại tài khoản
+if (!user) {
 
-ok:true
-
-});
-
-
-}
-
-
-
-
-// sai mật khẩu
-
-if(user.password!=password){
-
-return res.json({
-
-ok:false,
-msg:"Sai mật khẩu"
-
-});
+    return res.json({
+        ok: false,
+        msg: "Tài khoản không tồn tại"
+    });
 
 }
 
+// Sai mật khẩu
+if (user.password != password) {
 
-
-
-// khác thiết bị
-
-if(user.device!=device){
-
-return res.json({
-
-ok:false,
-
-msg:"Tài khoản đang dùng trên thiết bị khác"
-
-});
+    return res.json({
+        ok: false,
+        msg: "Sai mật khẩu"
+    });
 
 }
+
+// Khác thiết bị
+if (user.device != device) {
+
+    return res.json({
+        ok: false,
+        msg: "Tài khoản đang dùng trên thiết bị khác"
+    });
+
+}
+
+return res.json({
+    ok: true
+});
+
+});
 
 
 
