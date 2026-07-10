@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Quiz</title>
+
+
+<style>
+
+body{
+
+font-family:Arial;
+
+display:flex;
+
+justify-content:center;
+
+padding:30px;
+
+background:#eee;
+
+}
+
+
+.box{
+
+background:white;
+
+padding:20px;
+
+width:400px;
+
+border-radius:10px;
+
+}
+
+
+input,button{
+
+width:100%;
+
+padding:10px;
+
+margin:5px;
+
+}
+
+
+#quiz{
+
+display:none;
+
+}
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+<div class="box">
+
+
+<div id="login">
+
+
+<h2>Đăng nhập</h2>
+
+
+<input id="user" placeholder="Tài khoản">
+
+
+<input id="pass" placeholder="Mật khẩu">
+
+
+<button onclick="login()">
+
+Vào học
+
+</button>
+
+
+<p id="msg"></p>
+
+
+</div>
+
+
+
+
+<div id="quiz">
+
+
+<h2>
+Câu hỏi
+</h2>
+
+
+<p>
+Việt Nam thuộc Đông Nam Á?
+</p>
+
+
+<input type="radio" name="q" value="true">
+
+Đúng
+
+
+<br>
+
+
+<input type="radio" name="q" value="false">
+
+Sai
+
+
+
+<button onclick="check()">
+
+Kiểm tra
+
+</button>
+
+
+<h3 id="result"></h3>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+<script>
+
+
+let device=
+
+localStorage.device ||
+
+(localStorage.device=
+crypto.randomUUID());
+
+
+
+
+async function login(){
+
+
+let res=
+
+await fetch(
+"/login",
+{
+
+
+method:"POST",
+
+
+headers:{
+"Content-Type":"application/json"
+},
+
+
+body:JSON.stringify({
+
+username:user.value,
+
+password:pass.value,
+
+device
+
+})
+
+
+});
+
+
+
+let data=
+
+await res.json();
+
+
+
+
+if(data.ok){
+
+
+document
+.getElementById("login")
+.style.display="none";
+
+
+document
+.getElementById("quiz")
+.style.display="block";
+
+
+}
+
+else{
+
+
+msg.innerHTML=data.msg;
+
+
+}
+
+
+}
+
+
+
+
+
+function check(){
+
+
+let a=
+
+document.querySelector(
+"input[name=q]:checked"
+);
+
+
+
+result.innerHTML=
+
+a && a.value=="true"
+
+?
+
+"Đúng"
+
+:
+
+"Sai";
+
+
+}
+
+
+
+</script>
+
+
+</body>
+
+</html>
