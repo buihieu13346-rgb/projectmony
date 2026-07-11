@@ -36,22 +36,132 @@ border-radius:10px;
 }
 
 
-input,button{
+<style>
 
-width:100%;
-
-padding:10px;
-
-margin:5px;
-
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
 }
 
+body{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#4facfe,#00f2fe);
+padding:20px;
+}
+
+.box{
+width:100%;
+max-width:430px;
+background:#fff;
+padding:35px;
+border-radius:20px;
+box-shadow:0 15px 40px rgba(0,0,0,.2);
+}
+
+.logo{
+text-align:center;
+font-size:30px;
+font-weight:bold;
+color:#2196f3;
+margin-bottom:10px;
+}
+
+.sub{
+text-align:center;
+color:#777;
+margin-bottom:20px;
+}
+
+h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+input{
+width:100%;
+padding:14px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:10px;
+font-size:16px;
+outline:none;
+}
+
+input:focus{
+border-color:#2196f3;
+box-shadow:0 0 8px rgba(33,150,243,.3);
+}
+
+button{
+width:100%;
+padding:14px;
+margin-top:10px;
+border:none;
+border-radius:10px;
+background:#2196f3;
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+background:#1976d2;
+}
+
+.logout{
+background:#f44336;
+}
+
+.logout:hover{
+background:#d32f2f;
+}
+
+.answer{
+margin:15px 0;
+font-size:18px;
+}
+
+.answer input{
+width:auto;
+margin-right:10px;
+}
 
 #quiz{
-
 display:none;
+}
+
+#msg{
+color:red;
+text-align:center;
+margin-top:10px;
+}
+
+#result{
+margin-top:20px;
+text-align:center;
+color:#2196f3;
+font-size:22px;
+}
+
+@media(max-width:500px){
+
+.box{
+padding:25px;
+}
+
+.logo{
+font-size:24px;
+}
 
 }
+
+</style>
 
 </style>
 
@@ -65,6 +175,13 @@ display:none;
 
 <div class="box">
 
+<div class="logo">
+Luyện Đề 2.0
+</div>
+
+<div class="sub">
+Hệ thống luyện đề trực tuyến
+</div>
 
 <div id="login">
 
@@ -75,12 +192,15 @@ display:none;
 <input id="user" placeholder="Tài khoản">
 
 
-<input id="pass" placeholder="Mật khẩu">
+<input
+id="pass"
+type="password"
+placeholder="Mật khẩu">
 
 
 <button onclick="login()">
 
-Vào học
+Đăng nhập
 
 </button>
 
@@ -101,23 +221,36 @@ Câu hỏi
 </h2>
 
 
-<p>
+<p class="question">
+
 Việt Nam thuộc Đông Nam Á?
+
 </p>
 
 
-<input type="radio" name="q" value="true">
+<label class="answer">
+
+<input type="radio"
+name="q"
+value="true">
 
 Đúng
+
+</label>
 
 
 <br>
 
 
-<input type="radio" name="q" value="false">
+<label class="answer">
+
+<input type="radio"
+name="q"
+value="false">
 
 Sai
 
+</label>
 
 
 <button onclick="check()">
@@ -126,7 +259,9 @@ Kiểm tra
   
 
 </button>
-  <button onclick="logout()">
+  <button
+class="logout"
+onclick="logout()">
 
 Đăng xuất
 
