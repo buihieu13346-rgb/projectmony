@@ -407,6 +407,103 @@ width:550px;
 }
 
 }
+  .question-modal{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:rgba(0,0,0,.45);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9999;
+
+}
+
+.question-modal-content{
+
+    width:90%;
+
+    max-width:500px;
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:25px;
+
+}
+
+.question-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(5,1fr);
+
+    gap:12px;
+
+    margin:20px 0;
+
+}
+
+.question-item{
+
+    width:100%;
+
+    height:50px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#eeeeee;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+}
+
+.question-item.current{
+
+    background:#2196f3;
+
+    color:white;
+
+}
+
+.close-question-list{
+
+    width:100%;
+
+}
+
+@media(max-width:767px){
+
+.question-modal-content{
+
+    width:95%;
+
+}
+
+.question-grid{
+
+    grid-template-columns:repeat(4,1fr);
+
+}
+
+}
 </style>
 
 
@@ -608,7 +705,29 @@ onclick="logout()">
 
 
 
+<div id="questionModal" class="question-modal">
 
+    <div class="question-modal-content">
+
+        <h2>Danh sách câu hỏi</h2>
+
+        <div id="questionGrid" class="question-grid">
+
+            <button class="question-item current">1</button>
+
+        </div>
+
+        <button
+        id="closeQuestionList"
+        class="close-question-list">
+
+            Đóng
+
+        </button>
+
+    </div>
+
+</div>
 <script>
 
 
@@ -834,6 +953,39 @@ document.addEventListener(e,resetTimer);
 });
 
 resetTimer();
+  document
+.getElementById("openQuestionList")
+.addEventListener("click",()=>{
+
+    document
+    .getElementById("questionModal")
+    .style.display="flex";
+
+});
+
+document
+.getElementById("closeQuestionList")
+.addEventListener("click",()=>{
+
+    document
+    .getElementById("questionModal")
+    .style.display="none";
+
+});
+
+document
+.getElementById("questionModal")
+.addEventListener("click",(event)=>{
+
+    if(event.target.id=="questionModal"){
+
+        document
+        .getElementById("questionModal")
+        .style.display="none";
+
+    }
+
+});
   window.addEventListener("pagehide",()=>{
 
 if(!localStorage.user)return;
