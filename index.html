@@ -1011,6 +1011,45 @@ for(let i = 1; i <= TOTAL_QUESTIONS; i++){
     questionGrid.appendChild(button);
 
 }
+  let currentQuestion = 1;
+
+function updateQuestionNavigation(){
+
+    const buttons =
+    document.querySelectorAll(".question-item");
+
+    buttons.forEach(button=>{
+
+        button.classList.remove("current");
+
+        if(Number(button.dataset.question)===currentQuestion){
+
+            button.classList.add("current");
+
+        }
+
+    });
+
+}
+
+document
+.querySelectorAll(".question-item")
+.forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+        currentQuestion =
+        Number(button.dataset.question);
+
+        updateQuestionNavigation();
+
+        document
+        .getElementById("questionModal")
+        .style.display="none";
+
+    });
+
+});
   window.addEventListener("pagehide",()=>{
 
 if(!localStorage.user)return;
