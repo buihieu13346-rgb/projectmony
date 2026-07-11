@@ -256,6 +256,8 @@ a && a.value=="true"
 }
   async function logout(){
 
+if(localStorage.user){
+
 await fetch("/logout",{
 
 method:"POST",
@@ -272,9 +274,71 @@ username:localStorage.user
 
 });
 
+}
+
+localStorage.removeItem("user");
+
 location.reload();
 
 }
+  let timer;
+
+function resetTimer(){
+
+clearTimeout(timer);
+
+timer=setTimeout(()=>{
+
+logout();
+
+},600000);
+
+}
+
+[
+"click",
+"mousemove",
+"keydown",
+"scroll",
+"touchstart"
+].forEach(e=>{
+
+document.addEventListener(e,resetTimer);
+
+});
+
+resetTimer();
+  window.addEventListener("pagehide",()=>{
+
+if(!localStorage.user)return;
+
+navigator.sendBeacon(
+
+"/logout",
+
+new Blob(
+
+[
+
+JSON.stringify({
+
+username:localStorage.user
+
+})
+
+],
+
+{
+
+type:"application/json"
+
+}
+
+)
+
+);
+
+});
 
 
 
