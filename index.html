@@ -713,7 +713,7 @@ onclick="logout()">
 
         <div id="questionGrid" class="question-grid">
 
-            <button class="question-item current">1</button>
+            
 
         </div>
 
@@ -986,6 +986,31 @@ document
     }
 
 });
+  const TOTAL_QUESTIONS = 40;
+
+const questionGrid =
+document.getElementById("questionGrid");
+
+for(let i = 1; i <= TOTAL_QUESTIONS; i++){
+
+    const button =
+    document.createElement("button");
+
+    button.className = "question-item";
+
+    if(i == 1){
+
+        button.classList.add("current");
+
+    }
+
+    button.innerHTML = i;
+
+    button.dataset.question = i;
+
+    questionGrid.appendChild(button);
+
+}
   window.addEventListener("pagehide",()=>{
 
 if(!localStorage.user)return;
