@@ -564,90 +564,9 @@ Câu hỏi
 </h2>
 
 
-<p class="question">
+<p id="questionTitle" class="question"></p>
 
-Đọc các mệnh đề sau và chọn Đúng hoặc Sai.
-
-</p>
-
-<div class="statement">
-
-<p>1. Việt Nam thuộc Đông Nam Á.</p>
-
-<label class="switch">
-
-<input
-type="checkbox"
-id="s1"
-checked>
-
-<span class="slider"></span>
-
-</label>
-
-<span id="t1">Đúng</span>
-
-</div>
-
-
-<div class="statement">
-
-<p>2. Hà Nội là thủ đô của Việt Nam.</p>
-
-<label class="switch">
-
-<input
-type="checkbox"
-id="s2"
-checked>
-
-<span class="slider"></span>
-
-</label>
-
-<span id="t2">Đúng</span>
-
-</div>
-
-
-<div class="statement">
-
-<p>3. Việt Nam có 100 tỉnh.</p>
-
-<label class="switch">
-
-<input
-type="checkbox"
-id="s3"
-checked>
-
-<span class="slider"></span>
-
-</label>
-
-<span id="t3">Đúng</span>
-
-</div>
-
-
-<div class="statement">
-
-<p>4. TP.HCM là thủ đô Việt Nam.</p>
-
-<label class="switch">
-
-<input
-type="checkbox"
-id="s4"
-checked>
-
-<span class="slider"></span>
-
-</label>
-
-<span id="t4">Đúng</span>
-
-</div>
+<div id="questionContent"></div>
 
 
 <button onclick="check()">
@@ -1003,7 +922,45 @@ msg.innerHTML=data.msg;
 
 }
 
+function renderQuestion(questionNumber){
 
+    const question = questions[questionNumber - 1];
+
+    document.getElementById("questionTitle").innerHTML =
+    question.title;
+
+    let html = "";
+
+    for(let i = 0; i < question.statements.length; i++){
+
+        const statement = question.statements[i];
+
+        html += `
+        <div class="statement">
+
+            <p>${i + 1}. ${statement.text}</p>
+
+            <label class="switch">
+
+                <input
+                type="checkbox"
+                id="s${i + 1}"
+                checked>
+
+                <span class="slider"></span>
+
+            </label>
+
+            <span id="t${i + 1}">Đúng</span>
+
+        </div>
+        `;
+
+    }
+
+    document.getElementById("questionContent").innerHTML = html;
+
+}
 for(let i=1;i<=4;i++){
 
 const sw=document.getElementById("s"+i);
@@ -1150,6 +1107,7 @@ document.addEventListener(e,resetTimer);
 });
 
 resetTimer();
+  renderQuestion(1);
   document
 .getElementById("openQuestionList")
 .addEventListener("click",()=>{
